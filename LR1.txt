@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cmath>
+
+double perimeter(double down, double wall_l, double wall_r, double top){
+        return down+wall_l+wall_r+top;
+}
+
+double square(double down, double top, double height){
+        return (down+top)/2*height;
+}
+
+double middle_line(double down, double top){
+        return (down+top)/2;
+}
+
+int main(){
+        double down = 0, wall_left = 0, wall_right = 0, top = 0, height; //низ, стена левая, стена правая, верх, высота
+
+        while(down<=0){
+        std::cout<<"Введите большее основание трапеции = ";
+        std::cin>>down;
+        }
+
+        while(wall_left<=0){
+        std::cout<<"Введите левую стенку = ";
+        std::cin>>wall_left;
+        }
+
+        while(wall_right<=0){
+        std::cout<<"Введите правую стенку = ";
+        std::cin>>wall_right;
+        }
+
+        while(top<=0){
+        std::cout<<"Меньшее основание трапеции = ";
+        std::cin>>top;
+        }
+
+height = sqrt(pow(wall_left, 2) - pow(((pow(down-top, 2)+pow(wall_left, 2)-pow(wall_right, 2))/(2*(down-top))), 2));
+
+//Проверка на дурака
+if ((down>=(wall_left+wall_right+top) || wall_left>=(down+wall_right+top) || wall_right>=(down+wall_left+top) || top>=(down+wall_left+wall_right)) || ((wall_left+wall_right)<=(down-top)) || height==0 ){
+        std::cout<<"Такой трапеции не существует!"<<std::endl;
+        return 0;
+}
+
+
+std::cout<<"Высота трапеции = "<<height<<std::endl;
+std::cout<<"-----------------------------------------------------------"<<std::endl;
+
+
+std::cout<<"Периметр трапеции = "<<perimeter(down, wall_left, wall_right, top)<<std::endl;
+std::cout<<"Площадь трапеции = "<<square(down, top, height)<<std::endl;
+std::cout<<"Средняя линия = "<<middle_line(down, top)<<std::endl;
+}
+
